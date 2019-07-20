@@ -1,0 +1,44 @@
+Create Both
+Expunge Both
+SyncState *
+
+IMAPAccount circadence
+Host localhost
+Port 1143
+User "rpendergraph@circadence.com"
+PassCmd "security find-generic-password -s mbsync-exchange-password -w"
+AuthMechs LOGIN
+SSLType NONE
+Timeout 60
+
+IMAPStore circadence-remote
+Account circadence
+
+MaildirStore circadence-local
+Path ~/Mail/circadence/
+Inbox ~/Mail/circadence/Inbox
+
+Channel circadence-inbox
+Master :circadence-remote:
+Slave :circadence-local:
+Patterns "INBOX"
+
+Channel circadence-sent
+Master :circadence-remote:Sent
+Slave :circadence-local:Sent
+Patterns "Sent"
+
+Channel circadence-trash
+Master :circadence-remote:"Trash"
+Slave :circadence-local:"Trash"
+Patterns "Trash"
+
+Group Circadence
+Channel circadence-inbox
+Channel circadence-sent
+Channel circadence-trash
+
+
+
+
+

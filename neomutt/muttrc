@@ -1,0 +1,67 @@
+auto_view text/html
+alternative_order text/plain text/enriched text/html
+
+set mail_check=60
+set folder="~/Mail/Circadence"
+set mask="!^\\.[^.]"
+#set mbox="~/Mail/circadence"
+set record="Sent"
+set postponed="Drafts"
+set spoolfile=+Inbox
+set trash="Trash"
+mailboxes =Inbox =Drafts =Sent =Trash =Iapetus
+
+macro index c "<change-folder>?<toggle-mailboxes>" "open a different folder"
+macro pager c "<change-folder>?<toggle-mailboxes>" "open a different folder"
+macro index C "<copy-message>?<toggle-mailboxes>" "copy a message to a mailbox"
+macro index M "<save-message>?<toggle-mailboxes>" "move a message to a mailbox"
+macro compose A "<attach-message>?<toggle-mailboxes>" "attach message(s) to this message"
+
+set date_format = "%a, %b-%d  %k:%M"
+## From field gets 30% of remaining space, Subject gets 70%.
+## Remaining space is the total width minus the other fields (35), minus the sidebar (24)
+set my_index_format_pre='set my_col_from = `echo $((25 * ($(tput cols)-35-24) / 100))`; set my_col_subject = `echo $((75 * ($(tput cols)-35-24) / 100))`; set index_format="%Z [%D] %-$my_col_from.${my_col_from}' 
+set my_index_format_post=' (%-4.4c|%e/%E) %?M?<%M> ?%-$my_col_subject.${my_col_subject}s"'
+folder-hook .*[sS]ent.* "$my_index_format_pre"t"$my_index_format_post"
+folder-hook ! .*[sS]ent.* "$my_index_format_pre"F"$my_index_format_post"
+
+set index_format = "%Z %D  %-15.15L (%?l?%4l&%4c?) %s"
+set sidebar_visible = yes
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_width = 20
+set mail_check_stats
+set imap_check_subscribed
+set sort=threads
+set sort_browser=reverse-date
+set sort_aux=reverse-last-date-received
+set new_mail_command="terminal-notifier -title 'New Message [%u]' -subtitle 'New Mail: %f' -message '%n new messages, %u unread.\n%b mailboxes need attention' -activate 'com.apple.Terminal'"
+
+
+color index color160 default "~D(!~p|~p)" # deleted
+color index color254 default ~F # flagged
+color index color166 default ~= # duplicate messages
+color index color245 default "~A!~N!~T!~p!~Q!~F!~D!~P" # the rest
+color index color160 default "~A" # all messages
+color index color166 default "~E" # expired messages
+color index color33 default "~N" # new messages
+color index color33 default "~O" # old messages
+color index color61 default "~Q" # messages that have been replied to
+color index color245 default "~R" # read messages
+color index color33 default "~U" # unread messages
+color index color33 default "~U~$" # unread, unreferenced messages
+color index color244 default "~v" # messages part of a collapsed thread
+color index color244 default "~P" # messages from me
+color index color37 default "~p!~F" # messages to me
+color index color37 default "~N~p!~F" # new messages to me
+color index color37 default "~U~p!~F" # unread messages to me
+color index color245 default "~R~p!~F" # messages to me
+color index color160 default "~F" # flagged messages
+color index color160 default "~F~p" # flagged messages to me
+color index color160 default "~N~F" # new flagged messages
+color index color160 default "~N~F~p" # new flagged messages to me
+color index color160 default "~U~F~p" # new flagged messages to me
+color index color254 color160 "~D" # deleted messages
+color index color239 default "~v~(!~N)" # collapsed thread with no unread
+color index color136 default "~v~(~N)" # collapsed thread with some unread
+color index color64 default "~N~v~(~N)" # collapsed thread with unread parent
+
