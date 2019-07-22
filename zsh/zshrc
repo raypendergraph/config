@@ -97,14 +97,11 @@ export EDITOR='nvim'
 export TERM=xterm-256color
 export PATH=/usr/local/bin/:$PATH:~/go/bin
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=18'
-export KUBECONFIG=~/.config.k8s-pddev.rpendergraph
-export TILLER_NAMESPACE=rpendergraph
-export GOPROXY="http://rpendergraph:AKCp5ccbCEJEC4khr8yx9gVAmEGiK9UTGixtQkWBaytXRmFp8MnFrJT5VT9EL4T44yUY27LSL@artifactory.dev.circadence.net/artifactory/api/go/go"
-
-alias code="/Applications/Visual\ Studio\ Code.app/Contents/MacOS/Electron"
 
 if [ $ITERM_SESSION_ID ]; then
   export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"; ':"$PROMPT_COMMAND";
 fi
+
+source ~/.config/zsh/environment.zsh
 
 #[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
