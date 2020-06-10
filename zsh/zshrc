@@ -79,8 +79,6 @@ source $ZSH/oh-my-zsh.sh
 # Aliases
 source $current_dir/aliases.zsh
 
-GIT_PS1_SHOWDIRTYSTATE=true
-
 # Git completion 
 if [ ! -f $current_dir/git-completion.bash ]; then
    curl -o $current_dir/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
@@ -91,17 +89,16 @@ fpath=($current_dir $fpath)
 autoload -Uz compinit && compinit
 # End Git completion
 
-source ~/.kubernetes-functions-bash
+# Install sharper colors for nvim (requires gruvbox)
+source ~/.config/nvim/plugged/gruvbox/gruvbox_256palette_osx.sh 
 
 export EDITOR='nvim'
 export TERM=xterm-256color
-export PATH=/usr/local/bin/:$PATH:~/go/bin
+export PATH=/usr/local/bin/:$PATH
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=18'
-
-if [ $ITERM_SESSION_ID ]; then
-  export PROMPT_COMMAND='echo -ne "\033];${PWD##*/}\007"; ':"$PROMPT_COMMAND";
-fi
-
 source ~/.config/zsh/environment.zsh
+source ~/.config/zsh/functions/go-env.sh
+source ~/.config/zsh/functions/k-mongo.zsh
+PROMPT=$'%B%{$fg[green]%}⇰ %{$reset_color%}%b'
 
-#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
