@@ -102,4 +102,4 @@ done
    }
 
 # final output
-echo " $PRETTY_PATH $(cd $PANE_CURRENT_PATH && git_prompt)"
+echo " $PRETTY_PATH $(cd $PANE_CURRENT_PATH && git_prompt) "

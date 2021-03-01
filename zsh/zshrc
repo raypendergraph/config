@@ -75,7 +75,6 @@ plugins=(vi-mode zsh-autosuggestions)
 source $ZSH/oh-my-zsh.sh
 
 
-
 # Aliases
 source $current_dir/aliases.zsh
 
@@ -97,8 +96,6 @@ export TERM=xterm-256color
 export PATH=/usr/local/bin/:$PATH
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=18'
 source ~/.config/zsh/environment.zsh
-source ~/.config/zsh/functions/go-env.sh
-source ~/.config/zsh/functions/k-mongo.zsh
 PROMPT=$'%B%{$fg[green]%}⇰ %{$reset_color%}%b'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
